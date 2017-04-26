@@ -113,7 +113,8 @@ a:hover {border-bottom: 1px solid gray; }
   (and (boundp symbol) (not (constantp symbol))))
 
 (defun lambdalist (function)
-  #+sbcl(sb-introspect:function-lambda-list function))
+  #+sbcl(sb-introspect:function-lambda-list function)
+  #+ccl(ccl::arglist function))
 
 (defun external-p (symbol &optional (package *current-package*))
   (multiple-value-bind (result status)
@@ -143,6 +144,8 @@ a:hover {border-bottom: 1px solid gray; }
               :lambdalist (format nil "~{~(~a~)~^ ~}" (lambdalist macro)))))))
 
 
+#+CCL(defmethod finalize-inheritance ((class structure-class))
+       t)
 
 (defun doc-class (symbol condition-p)
   (let ((class (handler-case (find-class symbol)
