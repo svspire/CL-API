@@ -144,7 +144,8 @@ a:hover {border-bottom: 1px solid gray; }
               :lambdalist (format nil "~{~(~a~)~^ ~}" (lambdalist macro)))))))
 
 
-#+CCL(defmethod finalize-inheritance ((class structure-class))
+#+CCL
+(defmethod finalize-inheritance ((class structure-class))
        t)
 
 (defun doc-class (symbol condition-p)
